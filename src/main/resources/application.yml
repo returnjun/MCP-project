@@ -12,15 +12,19 @@ spring:
     banner-mode: off
     web-application-type: none
 
-logging:
-  pattern:
-    console:
-  file:
-    name: data/log/${spring.application.name}.log
-
 server:
   servlet:
     encoding:
       charset: UTF-8
       force: true
       enabled: true
+csdn:
+  auth-path: "csdn-auth.json" # 本地开发就写这个
+  # 等以后上了 Docker，你可以通过环境变量把它覆盖成 "/app/data/csdn-auth.json"
+
+logging:
+  level:
+    root: INFO
+    cn.bugstack.mcp: INFO
+  file:
+    name: data/log/${spring.application.name}.log

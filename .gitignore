@@ -37,3 +37,8 @@ build/
 ### Mac OS ###
 .DS_Store
 /.idea/
+
+
+### 个人本地数据与敏感凭证 (切勿提交) ###
+csdn-auth.json
+data/
