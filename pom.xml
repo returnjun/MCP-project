@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.bugstack.mcp</groupId>
-    <artifactId>mcp-server-csdn</artifactId>
+    <artifactId>mcp-server-weixin</artifactId>
     <version>1.0.0</version>
 
     <properties>

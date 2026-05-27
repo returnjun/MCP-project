@@ -11,8 +11,8 @@ import java.util.Map;
  */
 public class WeixinTemplateMessageDTO {
 
-    private String touser = "or0Ab6ivwmypESVp_bYuk92T6SvU";
-    private String template_id = "GLlAM-Q4jdgsktdNd35hnEbHVam2mwsW2YWuxDhpQkU";
+    private String touser = "ojiW43JYbdtwA6ogDuakrCWg2z_8";
+    private String template_id = "cVAmZs48H8pXGX7mzwaAXc9RCsTivllXLM6Js7V-0D4";
     private String url = "https://weixin.qq.com";
     private Map<String, Map<String, String>> data = new HashMap<>();
 

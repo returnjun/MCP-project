@@ -1,12 +1,12 @@
 package cn.bugstack.mcp.server.csdn.infrastructure.adapter;
 
-
 import cn.bugstack.mcp.server.csdn.domain.adapter.IWeiXiPort;
 import cn.bugstack.mcp.server.csdn.domain.model.WeiXinNoticeFunctionRequest;
 import cn.bugstack.mcp.server.csdn.domain.model.WeiXinNoticeFunctionResponse;
 import cn.bugstack.mcp.server.csdn.infrastructure.gateway.IWeixinApiService;
 import cn.bugstack.mcp.server.csdn.infrastructure.gateway.dto.WeixinTemplateMessageDTO;
 import cn.bugstack.mcp.server.csdn.infrastructure.gateway.dto.WeixinTokenResponseDTO;
+import cn.bugstack.mcp.server.csdn.type.properties.WeiXinApiProperties;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import com.google.common.cache.Cache;
@@ -33,14 +33,11 @@ public class WeiXiPort implements IWeiXiPort {
     @Override
     public WeiXinNoticeFunctionResponse weixinNotice(WeiXinNoticeFunctionRequest request) throws IOException {
         // 1. 获取 accessToken
-        String accessToken = weixinAccessToken.getIfPresent(properties.getAppid());
-        if (null == accessToken) {
-            Call<WeixinTokenResponseDTO> call = weixinApiService.getToken("client_credential", properties.getAppid(), properties.getAppsecret());
-            WeixinTokenResponseDTO weixinTokenResponseDTO = call.execute().body();
-            assert weixinTokenResponseDTO != null;
-            accessToken = weixinTokenResponseDTO.getAccess_token();
-            weixinAccessToken.put(properties.getAppid(), accessToken);
-        }
+        Call<WeixinTokenResponseDTO> call = weixinApiService.getToken("client_credential", properties.getAppid(), properties.getAppsecret());
+        WeixinTokenResponseDTO weixinTokenResponseDTO = call.execute().body();
+        assert weixinTokenResponseDTO != null;
+        String accessToken = weixinTokenResponseDTO.getAccess_token();
+        weixinAccessToken.put(properties.getAppid(), accessToken);
 
         // 2. 发送模板消息
         Map<String, Map<String, String>> data = new HashMap<>();
@@ -52,8 +49,8 @@ public class WeiXiPort implements IWeiXiPort {
         templateMessageDTO.setUrl(request.getJumpUrl());
         templateMessageDTO.setData(data);
 
-        Call<Void> call = weixinApiService.sendMessage(accessToken, templateMessageDTO);
-        call.execute();
+        Call<Void> wcall = weixinApiService.sendMessage(accessToken, templateMessageDTO);
+        wcall.execute();
 
         WeiXinNoticeFunctionResponse weiXinNoticeFunctionResponse = new WeiXinNoticeFunctionResponse();
         weiXinNoticeFunctionResponse.setSuccess(true);
