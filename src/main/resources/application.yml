@@ -1,6 +1,18 @@
+server:
+  port: 8102
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
 spring:
   application:
-    name: mcp-server-csdn
+    name: mcp-server-weixin
+  main:
+    banner-mode: off
+    # stdio 模式打开，sse 模式，注释掉。
+    # web-application-type: none
 
   ai:
     mcp:
@@ -8,19 +20,16 @@ spring:
         name: ${spring.application.name}
         version: 1.0.0
 
-  main:
-    banner-mode: off
-    web-application-type: none
+weixin:
+  api:
+    original_id: gh_9a5f9b51f4e0
+    app-id: wxd791e178e4628317
+    app-secret: c459c6bd2f7850c2e3e6416d5dde9275
+    template_id: 18dG-08t-14BvD5gDYb3WjVFm6P55iiYRv7s1h3vaZw
+    touser: ojiW43JYbdtwA6ogDuakrCWg2z_8
 
 logging:
   pattern:
     console:
   file:
     name: data/log/${spring.application.name}.log
-
-server:
-  servlet:
-    encoding:
-      charset: UTF-8
-      force: true
-      enabled: true
