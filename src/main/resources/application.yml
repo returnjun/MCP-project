@@ -13,7 +13,6 @@ spring:
     banner-mode: off
     # stdio 模式打开，sse 模式，注释掉。
 #    web-application-type: none
-
   ai:
     mcp:
       server:
