@@ -14,4 +14,4 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # 添加应用
 ADD target/mcp-server-weixin.jar /mcp-server-weixin.jar
 
-ENTRYPOINT ["sh","-c","java -jar $JAVA_OPTS /mcp-knowledge-app.jar $PARAMS"]
+ENTRYPOINT ["sh","-c","java -jar $JAVA_OPTS /mcp-server-weixin.jar $PARAMS"]
